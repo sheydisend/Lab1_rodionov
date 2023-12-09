@@ -13,7 +13,7 @@ int main()
 {
 	setlocale(LC_ALL, "RUS");
 	int n;
-	cout << "Введите порядок матрицы: ";
+	cout << "vvedite poryadok matrici: ";
 	do
 	{
 		cin >> n;
@@ -22,7 +22,7 @@ int main()
 	double* arrb = new double[n];
 	double** copya = new double* [n];
 	double* copyb = new double[n];
-	cout << "\nВведите матрицу: \n";
+	cout << "\nVvedide matricu: \n";
 	for (int i = 0; i < n; i++)
 	{
 		arra[i] = new double[n];
@@ -34,38 +34,38 @@ int main()
 			copya[i][j] = arra[i][j];
 		}
 	}
-	cout << "\nВведите свобоные члены: \n";
+	cout << "\nvvedite svobodnie chleni: \n";
 	for (int i = 0; i < n; i++)
 	{
 		cin >> arrb[i];
 		copyb[i] = arrb[i];
 	}
 	double* X = gaussmethod(arra, arrb, n);
-	cout << "\nРешение СЛАУ: " <<endl;
+	cout << "\nReshenie SLAU: " <<endl;
 	for (int i = 0; i < n; i++)
 	{
 		cout << X[i] << " ";
 	}
 	cout << endl;
 	double* F = vectornevyazki(copya, copyb, X, n);
-	cout << "\nВектор невязки F: " <<endl;
+	cout << "\nVektor nevyazki F: " <<endl;
 	for (int i = 0; i < n; i++)
 	{
 		cout << F[i] << " ";
 	}
 	cout << endl;
-	cout << "Норма вектора невязки F: " <<endl;
+	cout << "Norma vectora nevyazki F: " <<endl;
 	double normaVektora = norma_vektora(F, n);
 	cout << normaVektora;
 	double* b = vectorb(copya, X, n);
 	double* X2 = gaussmethod(copya, b, n);
-	cout << "\nРешение вспомогательной системы: " <<endl;
+	cout << "\nReshenie vspomagatelnoi sistemi : " <<endl;
 	for (int i = 0; i < n; i++)
 	{
 		cout << X2[i] << " ";
 	}
 	cout << endl;
-	cout << "Относительная погрешность: " << norma_vektora(raznost(X, X2, n), n) / norma_vektora(X, n) <<endl;
+	cout << "Otnositelnaya pogreshnost: " << norma_vektora(raznost(X, X2, n), n) / norma_vektora(X, n) <<endl;
 	cout << endl;
 	system("pause");
 	return 0;
@@ -74,14 +74,14 @@ int main()
 double* gaussmethod(double** arra, double* arrb, int n)
 {
 	double* X = new double[n];  
-	for (int k = 0; k < n; k++) // Прямой ход метода Гаусса
+	for (int k = 0; k < n; k++) 
 	{
 		for (int i = k + 1; i < n; i++)
 		{
 			if (abs(arra[i][k]) > abs(arra[k][k]))
 			{
-				swap(arra[i], arra[k]);  //меняются местами строки матрицы arra для того, чтобы элемент с максимальным абсолютным значением в текущем столбце переместился на место главного элемента
-				swap(arrb[i], arrb[k]);   // меняются местами элементы вектора свободных членов arrb.
+				swap(arra[i], arra[k]);  
+				swap(arrb[i], arrb[k]);   
 			}
 		}
 		double amain = arra[k][k];
@@ -106,7 +106,7 @@ double* gaussmethod(double** arra, double* arrb, int n)
 			arrb[i] -= s * arrb[k];
 		}
 	}
-	for (int k = n - 1; k >= 0; k--)  // Обратный ход метода Гаусса
+	for (int k = n - 1; k >= 0; k--)  
 	{
 		X[k] = arrb[k];
 		for (int i = n - 1; i > k; i--)
